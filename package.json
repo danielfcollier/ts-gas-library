@@ -1,0 +1,14 @@
+{
+  "name": "gas-payment-utils",
+  "version": "1.0.0",
+  "description": "BR payment tools with Apps Script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel A. F. Collier",
+  "license": "ISC",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.37"
+  }
+}
