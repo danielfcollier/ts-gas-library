@@ -1,15 +1,15 @@
 // --------------------------------------------------------------------------------------------------
+import { PaymentStatus } from "../../lib/payment/config";
 import {
     ConsultationLocation,
     ConsultationType,
     ConsultationModality,
-    ConsultationStatus,
-    PaymentStatus,
+    ConsultationStatus
 } from "../enum/business";
 // --------------------------------------------------------------------------------------------------
 export interface IConsultation {
     id: string;
-    customer: string;
+    patient: string;
     bookingDate: Date;
     modificationDate: Date;
     status: ConsultationStatus;
@@ -21,7 +21,8 @@ export interface IConsultation {
     description: string;
     dueDate: Date;
     value: number;
-    financial: Financial;
+    installmentCount?: number;
+    financial?: Financial;
 }
 // --------------------------------------------------------------------------------------------------
 interface Financial {

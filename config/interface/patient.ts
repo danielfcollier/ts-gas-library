@@ -1,5 +1,6 @@
 // --------------------------------------------------------------------------------------------------
-import { PaymentContract, DocumentType } from "../enum/business";
+import { DocumentType } from "../../lib/validation/config";
+import { PaymentContract } from "../enum/business";
 // --------------------------------------------------------------------------------------------------
 export interface IPatient {
     id: string;
@@ -9,12 +10,12 @@ export interface IPatient {
     email: string;
     birthday: Date;
     document: Document;
-    address: Partial<Address>;
+    address: Pick<Address, 'postalCode' | 'number'>;
     record: Record;
-    payment: Partial<Payment>
+    payment: Partial<PaymentInfo>
 }
 // --------------------------------------------------------------------------------------------------
-interface Payment {
+interface PaymentInfo {
     customerId: string;
     contract: PaymentContract;
 }
@@ -30,7 +31,7 @@ interface Record {
     registrationDate: Date;
     modificationDate: Date;
     numberOfConsultations: number;
-    lastConsultationDate: Date;
+    lastConsultationDate?: Date;
 }
 // --------------------------------------------------------------------------------------------------
 interface Address {

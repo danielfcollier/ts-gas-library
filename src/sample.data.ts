@@ -1,29 +1,46 @@
 import { IPatient } from "../config/interface/patient";
-import { ConsultationModality, ConsultationStatus, ConsultationType, PaymentContract, DocumentType, ConsultationLocation, PaymentStatus } from "../config/enum/business";
 import { IConsultation } from "../config/interface/consultation";
+import { IOrder } from "../lib/payment/interfaces";
+import {
+    ConsultationModality,
+    ConsultationStatus,
+    ConsultationType,
+    PaymentContract,
+    ConsultationLocation
+} from "../config/enum/business";
+import Time from "../lib/time";
+import { DocumentType } from "../lib/validation/config";
 // --------------------------------------------------------------------------------------------------
-const prospect: Partial<IPatient> = {
+const patientProspect: IPatient = {
     id: '73891731',
     fullName: 'Marcelo Almeida',
     cellPhone: '4799376637',
+    foreignCustomer: false,
     email: 'marcelo.almeida@gmail.com',
     birthday: new Date('1985-01-10'),
+    record: {
+        id: 'string',
+        registrationDate: new Date(),
+        modificationDate: new Date(),
+        numberOfConsultations: 0
+    },
     document: {
         number: '24971563792',
         type: DocumentType.cpf
     },
     address: {
-        postalCode: '71535-080'
+        postalCode: '71535-080',
+        number: 's/n'
     },
     payment: {
         contract: PaymentContract.release2021
     }
 };
 // // --------------------------------------------------------------------------------------------------
-function booking(customerId: string): Partial<IConsultation> {
+function consultationBooking(params: Pick<IOrder, 'id'>): IConsultation {
     return {
         id: '389173891731',
-        customer: customerId,
+        patient: params.id,
         bookingDate: new Date(),
         modificationDate: new Date(),
         status: ConsultationStatus.Pending,
@@ -33,21 +50,21 @@ function booking(customerId: string): Partial<IConsultation> {
         type: ConsultationType.Online,
         modality: ConsultationModality.BeijaFlor,
         description: `Consulta ${ConsultationType.Online} - Modalidade ${ConsultationModality.BeijaFlor}`,
-        dueDate: new Date('2021-11-04'),
+        dueDate: Time.incrementDateSystem('2021-11-11',-3),
         value: 320
     };
 };
 // // --------------------------------------------------------------------------------------------------
-export { prospect, booking };
+export { patientProspect, consultationBooking };
 // // --------------------------------------------------------------------------------------------------
-// const order = (prospect: Partial<IPatient>, booking: Partial<IIConsultation>) => {
+// const order = (patientProspect: IPatient, consultationBooking: IIConsultation) => {
 //     return {
-//         customer: `${prospect.payment.id}`,
+//         customer: `${patientProspect.payment.id}`,
 //         billingType: "CREDIT_CARD",
 //         dueDate: booking.dueDate,
 //         value: booking.value,
 //         description: booking.description,
-//         externalReference: prospect.id,
+//         externalReference: patientProspect.id,
 //         postalService: false
 //     }
 // };

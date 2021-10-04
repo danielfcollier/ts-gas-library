@@ -1,13 +1,14 @@
 // --------------------------------------------------------------------------------------------------
 import process from "../../.env";
-import { Pattern } from "../../config/interface/utils";
-import { cleanNumber, cleanPhone } from "./functions";
-import IsValid from "./validation";
+import Utils from "../utils";
+import { Pattern } from "./interfaces";
+
+import IsValid from "../validation";
 // --------------------------------------------------------------------------------------------------
 export default class Show {
     // ----------------------------------------------------------------------------------------------
     static desiredPattern(number: string, pattern: Pattern) {
-        return cleanNumber(number).replace(pattern.regex, pattern.mask)
+        return Utils.cleanNumber(number).replace(pattern.regex, pattern.mask)
     }
     // ----------------------------------------------------------------------------------------------
     static firstName(fullName: string) {
@@ -26,35 +27,35 @@ export default class Show {
     // ----------------------------------------------------------------------------------------------
     static postalCode(postalCode: string) {
         IsValid.postalCode(postalCode);
-        return cleanNumber(postalCode).replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2-$3');
+        return Utils.cleanNumber(postalCode).replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2-$3');
     }
     // ----------------------------------------------------------------------------------------------
     static dateForSystem(date: Date) {
-        return Utilities.formatDate(date, process.env.GMT_LOCATION, 'yyyy-MM-dd');
+        return Utilities.formatDate(date,process.env.GMT_LOCATION, 'yyyy-MM-dd');
     }
     // ----------------------------------------------------------------------------------------------
     static dateForPerson(date: Date) {
-        return Utilities.formatDate(date, process.env.GMT_LOCATION, 'dd/MM/yyyy');
+        return Utilities.formatDate(date,process.env.GMT_LOCATION, 'dd/MM/yyyy');
     }
     // ----------------------------------------------------------------------------------------------
     static document(document: string) {
-        document = cleanNumber(document);
+        document = Utils.cleanNumber(document);
         IsValid.document(document);
         if (document.length === 11) {
-            return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
         }
         else if (document.length === 14) {
-            return document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+            return document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
         }
     }
     static phone(phone: string) {
-        phone = cleanPhone(phone);
+        phone = Utils.cleanPhone(phone);
         IsValid.phoneSize(phone);
         return this.phoneMasks(phone);
     }
     // ----------------------------------------------------------------------------------------------
     static cellPhone(cellPhone: string) {
-        cellPhone = cleanPhone(cellPhone);
+        cellPhone = Utils.cleanPhone(cellPhone);
         IsValid.phoneSize(cellPhone);
         cellPhone = this.cellPhoneFormatter(cellPhone);
         return this.phone(cellPhone);

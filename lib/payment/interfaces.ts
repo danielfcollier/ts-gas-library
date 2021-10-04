@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
-export interface ICustomer {
-    id?: string;
+interface ICustomer {
+    id: string;
     externalReference: string;
     name: string;
     email: string;
@@ -17,14 +17,47 @@ export interface ICustomer {
     phoneCallEnabledForCustomer: boolean;
     observations?: string;
     foreignCustomer: boolean;
-};
-// --------------------------------------------------------------------------------------------------
-export interface IOrder {
-    customer?: string;
-    billingType: string;
-    dueDate: string;
-    value: number;
-    description: string;
-    postalService: boolean;
 }
+// --------------------------------------------------------------------------------------------------
+interface IOrder {
+    externalReference: string;
+    id: string;
+    customer: string;
+    value: number;
+    netValue?: number;
+    totalValue?: number;
+    installmentCount?: number;
+    billingType: string;
+    status?: string;
+    description: string;
+    clientPaymentDate?: string;
+    paymentDate?: string;
+    confirmedDate?: string;
+    dueDate: string;
+    lastInvoiceViewedDate?: string;
+    deleted?: boolean;
+    postalService: boolean;
+    invoiceUrl?: string;
+    invoiceNumber?: string;
+}
+// --------------------------------------------------------------------------------------------------
+interface OrdersQuery {
+    all?: boolean;
+    billingType?: string;
+    status?: string;
+    paymentDate?: string;
+    clientPaymentDate?: string;
+    offset?: number;
+    limit?: number;
+    range?: { from: string, to: string };
+    date?: DateStruct;
+}
+// --------------------------------------------------------------------------------------------------
+interface DateStruct {
+    name?: 'dueDate' | 'paymentDate' | 'clientPaymentDate' | 'confirmedDate' | 'dateCreated',
+    from?: string,
+    to?: string
+}
+// --------------------------------------------------------------------------------------------------
+export { OrdersQuery, ICustomer, IOrder };
 // --------------------------------------------------------------------------------------------------
