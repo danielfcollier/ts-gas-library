@@ -5,6 +5,10 @@ const callError = (error: ErrorTable) => new Error(error);
 // --------------------------------------------------------------------------------------------------
 export default class CallError {
     // ----------------------------------------------------------------------------------------------
+    static calendarApp() {
+        return callError(ErrorTable.CalendarApp);
+    }
+    // ----------------------------------------------------------------------------------------------
     static execution() {
         return callError(ErrorTable.Execution);
     }

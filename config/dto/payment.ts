@@ -47,7 +47,6 @@ function buidlFromConsultationOrderDTO(dto: IConsultation): Omit<IOrder, 'id'> {
     
     return order;
 }
-
 // --------------------------------------------------------------------------------------------------
 export { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO };
 // --------------------------------------------------------------------------------------------------

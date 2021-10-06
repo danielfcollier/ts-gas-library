@@ -12,7 +12,9 @@ export interface IPatient {
     document: Document;
     address: Pick<Address, 'postalCode' | 'number'>;
     record: Record;
-    payment: Partial<PaymentInfo>
+    payment: Partial<PaymentInfo>,
+    getFirstName?: { (): string };
+    getLastName?: { (): string };
 }
 // --------------------------------------------------------------------------------------------------
 interface PaymentInfo {

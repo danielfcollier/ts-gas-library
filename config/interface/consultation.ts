@@ -31,4 +31,16 @@ interface Financial {
     fees: number;
     taxes: number;
 }
+
+enum ConsultationColor {
+    BlueStrong = 1,
+    BlueLight,
+    OrangeStong,
+    OrangeLight,
+    PurpleStrong, 
+    PurpleLight,
+    Gray,
+    Red
+}
+
 // --------------------------------------------------------------------------------------------------

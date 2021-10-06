@@ -3,6 +3,17 @@ import process from "../../.env";
 // --------------------------------------------------------------------------------------------------
 export default class Time {
     // ----------------------------------------------------------------------------------------------
+    static getRelativeDate(daysOffset, time: string) {
+        const date = new Date();
+        const [hours, minutes] = time.split('h');
+        date.setDate(date.getDate() + daysOffset);
+        date.setHours(parseInt(hours));
+        date.setMinutes(parseInt(minutes) ?? 0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        return date;
+    }
+    // ----------------------------------------------------------------------------------------------
     static getDateFromPerson(dateString: string) {
         const [day, month, year] = dateString.split('/');
         return new Date(`${year}-${month}-${day}T12:00:00`);

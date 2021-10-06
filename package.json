@@ -9,6 +9,7 @@
   "author": "Daniel A. F. Collier",
   "license": "ISC",
   "dependencies": {
-    "@types/google-apps-script": "^1.0.37"
+    "@types/google-apps-script": "^1.0.37",
+    "tslint": "^6.1.3"
   }
 }

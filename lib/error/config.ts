@@ -1,6 +1,7 @@
 // --------------------------------------------------------------------------------------------------
 enum ErrorTable {
     Execution = 'Execução inválida!',
+    CalendarApp = 'Erro durante uso do calendário!',
     Date = 'Data inválida!',
     PostalCode = 'CEP inválido!',
     Document = 'CPF ou CNPJ inválido!',
