@@ -1,4 +1,11 @@
 // --------------------------------------------------------------------------------------------------
+enum ConsultationColor {
+    Artemisia = GoogleAppsScript.Calendar.EventColor.GREEN as number,
+    BeijaFlor = GoogleAppsScript.Calendar.EventColor.BLUE as number,
+    Girassol = GoogleAppsScript.Calendar.EventColor.RED as number,
+    DIU = GoogleAppsScript.Calendar.EventColor.GRAY as number
+}
+// --------------------------------------------------------------------------------------------------
 enum ConsultationLocation {
     Florianopolis = 'Florianópolis',
     Brasilia = 'Brasília'
@@ -29,6 +36,7 @@ enum PaymentContract {
 }
 // --------------------------------------------------------------------------------------------------
 export {
+    ConsultationColor,
     ConsultationLocation,
     ConsultationType,
     ConsultationModality,

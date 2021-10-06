@@ -3,12 +3,11 @@ import process from "../../.env";
 // --------------------------------------------------------------------------------------------------
 export default class Time {
     // ----------------------------------------------------------------------------------------------
-    static getRelativeDate(daysOffset, time: string) {
+    static getRelativeDate(daysOffset, time: {hours: number, minutes: number}) {
         const date = new Date();
-        const [hours, minutes] = time.split('h');
         date.setDate(date.getDate() + daysOffset);
-        date.setHours(parseInt(hours));
-        date.setMinutes(parseInt(minutes) ?? 0);
+        date.setHours(time.hours);
+        date.setMinutes(time.minutes);
         date.setSeconds(0);
         date.setMilliseconds(0);
         return date;

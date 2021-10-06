@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------
-import { DocumentType } from "../../lib/validation/config";
+import { DocumentType } from "../enum/personal";
 import { PaymentContract } from "../enum/business";
 // --------------------------------------------------------------------------------------------------
 export interface IPatient {

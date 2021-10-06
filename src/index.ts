@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------
-import { patientProspect, consultationBooking } from "./sample.data";
+import { patientProspect, consultationBooking } from "../global/.env.sample.data";
 import { Customer, Order, Finances } from "../lib/payment";
-import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from "../config/dto/payment";
+import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from "../settings/dto/payment";
 import { OrdersQuery } from "../lib/payment/interfaces";
 // --------------------------------------------------------------------------------------------------
 const verbose = true;

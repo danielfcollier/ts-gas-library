@@ -1,5 +1,5 @@
 node_modules/
-.env.doctor.ts
-.env.payment.ts
+global/.env.doctor.ts
+global/.env.payment.ts
+global/sample.curl.sh
 .clasp.json
-sample.curl.sh

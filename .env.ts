@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
-import { doctor } from "./.env.doctor";
-import { payment } from "./.env.payment"
+import { doctor } from "./global/.env.doctor";
+import { payment } from "./global/.env.payment"
 // --------------------------------------------------------------------------------------------------
 const isSandbox = false;
 // --------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const process: any = {
         CALENDAR_APP_ID: doctor.calendarAppId,
         CALENDAR_CLOSED_MEETING_COLOR: CalendarApp.EventColor.GRAY,
         CALENDAR_CLOSED_MEETING_TITLE: 'BLOQUEADO',
-        CALENDAR_OPEN_MEETING_TITLE: 'DISPONÍVEL'
+        CALENDAR_OPEN_MEETING_TITLE: 'LIVRE'
     }
 };
 // --------------------------------------------------------------------------------------------------

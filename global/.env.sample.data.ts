@@ -1,5 +1,5 @@
-import { IPatient } from "../config/interface/patient";
-import { IConsultation } from "../config/interface/consultation";
+import { IPatient } from "../settings/interface/patient";
+import { IConsultation } from "../settings/interface/consultation";
 import { IOrder } from "../lib/payment/interfaces";
 import {
     ConsultationModality,
@@ -7,9 +7,9 @@ import {
     ConsultationType,
     PaymentContract,
     ConsultationLocation
-} from "../config/enum/business";
+} from "../settings/enum/business";
 import Time from "../lib/time";
-import { DocumentType } from "../lib/validation/config";
+import { DocumentType } from "../settings/enum/personal";
 // --------------------------------------------------------------------------------------------------
 const patientProspect: IPatient = {
     id: '73891731',

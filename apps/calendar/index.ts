@@ -5,7 +5,7 @@ import CallError from "../../lib/error";
 // --------------------------------------------------------------------------------------------------
 export default class AppCalendar {
     // ----------------------------------------------------------------------------------------------
-    private static validationParams: any = {
+    private static calendarParams: any = {
         title: process.env.CALENDAR_CLOSED_MEETING_TITLE,
         color: process.env.CALENDAR_CLOSED_MEETING_COLOR,
         pattern: new RegExp(process.env.CALENDAR_OPEN_MEETING_TITLE.toLowerCase()),
@@ -17,7 +17,7 @@ export default class AppCalendar {
 
         if (events.length === 0) throw CallError.calendarApp();
 
-        if (this.validationParams.pattern.test(events[0].getTitle().toLowerCase())) {
+        if (this.calendarParams.pattern.test(events[0].getTitle().toLowerCase())) {
             const eventId = events[0].getId();
             this.update({ ...meeting, id: eventId });
             return eventId;
@@ -48,8 +48,8 @@ export default class AppCalendar {
         };
 
         calendar.getEventsForDay(date)
-            .filter(event => this.validationParams.pattern.test(event.getTitle().toLowerCase()))
-            .forEach(event => action(event, this.validationParams));
+            .filter(event => this.calendarParams.pattern.test(event.getTitle().toLowerCase()))
+            .forEach(event => action(event, this.calendarParams));
     }
     // ----------------------------------------------------------------------------------------------
 }
