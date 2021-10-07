@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------
 enum ConsultationColor {
-    Artemisia = GoogleAppsScript.Calendar.EventColor.GREEN as number,
-    BeijaFlor = GoogleAppsScript.Calendar.EventColor.BLUE as number,
-    Girassol = GoogleAppsScript.Calendar.EventColor.RED as number,
-    DIU = GoogleAppsScript.Calendar.EventColor.GRAY as number
+    Artemisia = CalendarApp.EventColor.GREEN as number,
+    BeijaFlor = CalendarApp.EventColor.BLUE as number,
+    Girassol = CalendarApp.EventColor.RED as number,
+    DIU = CalendarApp.EventColor.GRAY as number
 }
 // --------------------------------------------------------------------------------------------------
 enum ConsultationLocation {

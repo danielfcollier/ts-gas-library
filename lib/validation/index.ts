@@ -1,8 +1,8 @@
 // --------------------------------------------------------------------------------------------------
-import Utils from "../utils";
-import CallError from "../error";
-import Time from "../time";
-import Show from "../show";
+import Utils from '../utils';
+import CallError from '../error';
+import Time from '../time';
+import Show from '../show';
 // --------------------------------------------------------------------------------------------------
 export default class IsValid {
     // ----------------------------------------------------------------------------------------------

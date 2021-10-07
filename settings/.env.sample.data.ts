@@ -1,5 +1,5 @@
-import { IPatient } from "../settings/interface/patient";
-import { IConsultation } from "../settings/interface/consultation";
+import { IPatient } from "./interface/patient";
+import { IConsultation } from "./interface/consultation";
 import { IOrder } from "../lib/payment/interfaces";
 import {
     ConsultationModality,
@@ -7,35 +7,37 @@ import {
     ConsultationType,
     PaymentContract,
     ConsultationLocation
-} from "../settings/enum/business";
+} from "./enum/business";
 import Time from "../lib/time";
-import { DocumentType } from "../settings/enum/personal";
+import { DocumentType } from "./enum/personal";
 // --------------------------------------------------------------------------------------------------
-const patientProspect: IPatient = {
-    id: '73891731',
-    fullName: 'Marcelo Almeida',
-    cellPhone: '4799376637',
-    foreignCustomer: false,
-    email: 'marcelo.almeida@gmail.com',
-    birthday: new Date('1985-01-10'),
-    record: {
-        id: 'string',
-        registrationDate: new Date(),
-        modificationDate: new Date(),
-        numberOfConsultations: 0
-    },
-    document: {
-        number: '24971563792',
-        type: DocumentType.cpf
-    },
-    address: {
-        postalCode: '71535-080',
-        number: 's/n'
-    },
-    payment: {
-        contract: PaymentContract.release2021
-    }
-};
+function patientProspect(): IPatient {
+    return {
+        id: '73891731',
+        fullName: 'Marcelo Almeida',
+        cellPhone: '4799376637',
+        foreignCustomer: false,
+        email: 'marcelo.almeida@gmail.com',
+        birthday: new Date('1985-01-10'),
+        record: {
+            id: 'string',
+            registrationDate: new Date(),
+            modificationDate: new Date(),
+            numberOfConsultations: 0
+        },
+        document: {
+            number: '24971563792',
+            type: DocumentType.cpf
+        },
+        address: {
+            postalCode: '71535-080',
+            number: 's/n'
+        },
+        payment: {
+            contract: PaymentContract.release2021
+        }
+    };
+}
 // // --------------------------------------------------------------------------------------------------
 function consultationBooking(params: Pick<IOrder, 'id'>): IConsultation {
     return {
@@ -50,7 +52,7 @@ function consultationBooking(params: Pick<IOrder, 'id'>): IConsultation {
         type: ConsultationType.Online,
         modality: ConsultationModality.BeijaFlor,
         description: `Consulta ${ConsultationType.Online} - Modalidade ${ConsultationModality.BeijaFlor}`,
-        dueDate: Time.incrementDateSystem('2021-11-11',-3),
+        dueDate: Time.incrementDateSystem('2021-11-11', -3),
         value: 320
     };
 };

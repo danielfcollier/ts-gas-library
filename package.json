@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/google-apps-script": "^1.0.37",
+    "@types/qunit": "^2.11.2",
+    "qunit": "^2.17.2",
     "tslint": "^6.1.3"
   }
 }

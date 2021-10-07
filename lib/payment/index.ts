@@ -1,11 +1,11 @@
 // --------------------------------------------------------------------------------------------------
-import process from "../../.env";
-import CallError from "../error";
-import FetchApp from "../fetch";
-import Show from "../show";
-import Utils from "../utils";
-import { BillingType, PaymentStatus } from "./config";
-import { ICustomer, IOrder, OrdersQuery } from "./interfaces";
+import process from '../../.env';
+import CallError from '../error';
+import FetchApp from '../fetch';
+import Show from '../show';
+import Utils from '../utils';
+import { BillingType, PaymentStatus } from './config';
+import { ICustomer, IOrder, OrdersQuery } from './interfaces';
 // --------------------------------------------------------------------------------------------------
 const API = process.env.PAYMENT_ROOT_URL;
 // --------------------------------------------------------------------------------------------------

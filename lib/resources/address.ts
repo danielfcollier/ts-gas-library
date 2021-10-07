@@ -1,7 +1,7 @@
-// import process from "../../.env";
-// import FetchApp from "../fetch";
+// import process from '../../.env';
+// import FetchApp from '../fetch';
 
-// REACT_APP_CEP = "https://viacep.com.br/ws/"
+// REACT_APP_CEP = 'https://viacep.com.br/ws/'
 
 // export const getAddressByCep = async (cep: string) => {
 //     return await FetchApp.get(`${process.env.REACT_APP_CEP}${cep}/json/unicode/`)

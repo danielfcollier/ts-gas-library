@@ -1,8 +1,8 @@
 // --------------------------------------------------------------------------------------------------
-import { patientProspect, consultationBooking } from "../global/.env.sample.data";
-import { Customer, Order, Finances } from "../lib/payment";
-import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from "../settings/dto/payment";
-import { OrdersQuery } from "../lib/payment/interfaces";
+import { patientProspect, consultationBooking } from '../settings/.env.sample.data';
+import { Customer, Order, Finances } from '../lib/payment';
+import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from '../settings/dto/payment';
+import { OrdersQuery } from '../lib/payment/interfaces';
 // --------------------------------------------------------------------------------------------------
 const verbose = true;
 const customerId = 'cus_000024421601';
@@ -15,7 +15,7 @@ if (isInstallment) args.installmentCount = 3;
 // Utilities.parseCsv(csv)
 // --------------------------------------------------------------------------------------------------
 function createCustomer() {
-    const customer = buildFromPatientCustomerDTO(patientProspect);
+    const customer = buildFromPatientCustomerDTO(patientProspect());
     let { id } = Customer.create(customer);
     console.log(id);
 }

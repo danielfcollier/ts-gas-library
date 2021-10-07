@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------
-import process from "../../.env";
-import Utils from "../utils";
-import { Pattern } from "./interfaces";
+import process from '../../.env';
+import Utils from '../utils';
+import { Pattern } from './interfaces';
 
-import IsValid from "../validation";
+import IsValid from '../validation';
 // --------------------------------------------------------------------------------------------------
 export default class Show {
     // ----------------------------------------------------------------------------------------------
@@ -12,17 +12,17 @@ export default class Show {
     }
     // ----------------------------------------------------------------------------------------------
     static firstName(fullName: string) {
-        return fullName.trim().split(" ")[0];
+        return fullName.trim().split(' ')[0];
     }
     // ----------------------------------------------------------------------------------------------
     static lastName(fullName: string) {
-        const nameSplit = fullName.trim().split(" ");
+        const nameSplit = fullName.trim().split(' ');
 
         return nameSplit[nameSplit.length - 1];
     }
     // ----------------------------------------------------------------------------------------------
     static email(email: string) {
-        return email.toLowerCase().replace(/\s/g, "")
+        return email.toLowerCase().replace(/\s/g, '')
     }
     // ----------------------------------------------------------------------------------------------
     static postalCode(postalCode: string) {
@@ -63,10 +63,10 @@ export default class Show {
     // ----------------------------------------------------------------------------------------------
     private static phoneMasks(phone: string) {
         if (phone.length === 11) {
-            return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+            return phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         }
         else if (phone.length === 10) {
-            return phone.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+            return phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
         }
         else if (phone[0] === '+') {
             return phone;

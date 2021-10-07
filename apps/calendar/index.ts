@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------
-import Meeting from "./interface";
-import process from "../../.env";
-import CallError from "../../lib/error";
+import Meeting from './interface';
+import process from '../../.env';
+import CallError from '../../lib/error';
 // --------------------------------------------------------------------------------------------------
 export default class AppCalendar {
     // ----------------------------------------------------------------------------------------------
