@@ -3,6 +3,8 @@ import { patientProspect, consultationBooking } from '../settings/.env.sample.da
 import { Customer, Order, Finances } from '../lib/payment';
 import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from '../settings/dto/payment';
 import { OrdersQuery } from '../lib/payment/interfaces';
+import Show from '../lib/show';
+import Time from '../lib/time';
 // --------------------------------------------------------------------------------------------------
 const verbose = true;
 const customerId = 'cus_000024421601';
@@ -13,6 +15,12 @@ if (isInstallment) args.installmentCount = 3;
 
 // Utilities.getUuid()
 // Utilities.parseCsv(csv)
+function testing(){
+    console.log(Show.dateForPerson(Time.getRelativeDate(0, { hours: 0, minutes: 0 })))
+    console.log((Time.getRelativeDate(0, { hours: 0, minutes: 0 })))
+    console.log(Show.dateForPerson(new Date()))
+    console.log(new Date())
+   }
 // --------------------------------------------------------------------------------------------------
 function createCustomer() {
     const customer = buildFromPatientCustomerDTO(patientProspect());

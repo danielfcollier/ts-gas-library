@@ -38,6 +38,20 @@ export default class FetchApp {
         return { ...data };
     }
     // ----------------------------------------------------------------------------------------------
+    static put(url: string, payload: any, options: Options = { verbose: false }) {
+        const request = this.request('put', options);
+        const params = { ...request, payload: JSON.stringify(payload) };
+
+        this.verbose(options, { url, payload });
+
+        const response = UrlFetchApp.fetch(url, { ...params, muteHttpExceptions: options.verbose });
+        const data: any = JSON.parse(response.getContentText());
+
+        this.verbose(options, { data });
+
+        return { ...data };
+    }
+    // ----------------------------------------------------------------------------------------------
     static remove(url: string, options: Options = { verbose: false }) {
         const params = this.request('delete', options);
 

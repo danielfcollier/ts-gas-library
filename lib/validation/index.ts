@@ -1,6 +1,5 @@
 // --------------------------------------------------------------------------------------------------
 import Utils from '../utils';
-import CallError from '../error';
 import Time from '../time';
 import Show from '../show';
 // --------------------------------------------------------------------------------------------------
@@ -13,19 +12,19 @@ export default class IsValid {
             return true;
         }
 
-        throw CallError.date();
+        return false;
     }
     // ----------------------------------------------------------------------------------------------
     static postalCode(postalCode: string) {
         if (postalCode) {
-            const objZipCode = Maps.newGeocoder().geocode(postalCode);
+            const objZipCode = Maps.newGeocoder().geocode(Utils.cleanNumber(postalCode));
 
             if (objZipCode.status === 'OK') {
                 return true;
             }
         }
 
-        throw CallError.postalCode();
+        return false;
     }
     // ----------------------------------------------------------------------------------------------
     static phoneSize(phone: string) {
@@ -34,20 +33,21 @@ export default class IsValid {
         const internationalPattern = /^\d{12,15}$/;
 
         if (!(localPattern.test(phone) || internationalPattern.test(phone))) {
-            throw CallError.phone();
+            return false;
         };
+        return true;
     }
     // ----------------------------------------------------------------------------------------------
     static document(document: string) {
         document = Utils.cleanNumber(document);
         if (document.length === 11) {
-            this.cpf(document);
+            return this.cpf(document);
         }
         else if (document.length === 14) {
-            this.cnpj(document);
+            return this.cnpj(document);
         }
         else {
-            throw CallError.document();
+            return false;
         }
     }
     // ----------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ export default class IsValid {
             document == '88888888888' ||
             document == '99999999999'
         ) {
-            throw CallError.document();
+            return false;
         }
         let sum = 0;
         let reminder;
@@ -76,14 +76,14 @@ export default class IsValid {
         }
         reminder = (sum * 10) % 11;
         if ((reminder == 10) || (reminder == 11)) reminder = 0;
-        if (reminder != parseInt(document.substring(9, 10))) throw CallError.document();
+        if (reminder != parseInt(document.substring(9, 10))) return false;
         sum = 0;
         for (let i = 1; i <= 10; i++) {
             sum = sum + parseInt(document.substring(i - 1, i)) * (12 - i);
         }
         reminder = (sum * 10) % 11;
         if ((reminder == 10) || (reminder == 11)) reminder = 0;
-        if (reminder != parseInt(document.substring(10, 11))) throw CallError.document();
+        if (reminder != parseInt(document.substring(10, 11))) return false;
         return true;
     }
     // ----------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ export default class IsValid {
         // Remove possibilities with repeated numbers
         const numberSplit = document.split('');
         const numberSet = new Set(numberSplit);
-        if (numberSet.size === 1) throw CallError.document();
+        if (numberSet.size === 1) return false;
 
         // CNPJ Validator
         const calc = (x) => {
@@ -116,13 +116,13 @@ export default class IsValid {
 
         // Validate 1st last digt
         const digit0 = calc(12);
-        if (digit0 !== parseInt(digits[0])) throw CallError.document();
+        if (digit0 !== parseInt(digits[0])) return false;
 
         // Validate 2nd last digt
         const digit1 = calc(13);
-        if (digit1 !== parseInt(digits[1])) {
-            throw CallError.document();
-        }
+        if (digit1 !== parseInt(digits[1])) return false;
+
+        return true;
     }
     // ----------------------------------------------------------------------------------------------
 }

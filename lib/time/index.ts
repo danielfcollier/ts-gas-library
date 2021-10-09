@@ -3,7 +3,19 @@ import process from '../../.env';
 // --------------------------------------------------------------------------------------------------
 export default class Time {
     // ----------------------------------------------------------------------------------------------
-    static getRelativeDate(daysOffset, time: {hours: number, minutes: number}) {
+    static getDaysOfMonth(year:number, month: number) {
+        const start = new Date(year, month, 1);
+        const end = new Date(year, month + 1, 0);
+        return { start, end };
+    }
+    // ----------------------------------------------------------------------------------------------
+    static getLocalDatetime(date: Date) {
+        return Utilities.formatDate(date, process.env.GMT_LOCATION, "yyyy-MM-dd'T'HH:mm:ss'Z'");
+    }
+    // ----------------------------------------------------------------------------------------------
+    
+    // ----------------------------------------------------------------------------------------------
+    static getRelativeDate(daysOffset: number, time: { hours: number, minutes: number }) {
         const date = new Date();
         date.setDate(date.getDate() + daysOffset);
         date.setHours(time.hours);
@@ -15,12 +27,12 @@ export default class Time {
     // ----------------------------------------------------------------------------------------------
     static getDateFromPerson(dateString: string) {
         const [day, month, year] = dateString.split('/');
-        return new Date(`${year}-${month}-${day}T12:00:00`);
+        return new Date(`${year}-${month}-${day}T00:00:00`);
     }
     // ----------------------------------------------------------------------------------------------
     // Credits: https://stackoverflow.com/questions/6356164/simple-javascript-date-math-not-really
     static incrementDateSystem(dateString: string, amount: number) {
-        const date = new Date(`${dateString}T12:00:00`);
+        const date = new Date(`${dateString}T00:00:00`);
         date.setDate(date.getDate() + amount);
         return date;
     };
@@ -31,7 +43,7 @@ export default class Time {
         return dateResult;
     };
     // ----------------------------------------------------------------------------------------------
-    static getDateDiff(date: Date, dateReference: string) {
+    static getDayDiff(date: Date, dateReference: string) {
         return Math.floor((date.getTime() - (new Date(`${dateReference}T00:00:00`)).getTime()) / process.env.MILISECONDS_IN_A_DAY);
     }
     // ----------------------------------------------------------------------------------------------

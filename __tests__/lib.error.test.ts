@@ -1,58 +1,43 @@
 // --------------------------------------------------------------------------------------------------
 import CallError from '../lib/error';
 import ErrorTable from '../lib/error/config';
-
-function divideThenRound(numerator, denominator) {
-    return Math.round(numerator / denominator);
-}
 // --------------------------------------------------------------------------------------------------
 function testLibError() {
     // ----------------------------------------------------------------------------------------------
-    QUnit.module("Basic tests", hooks => {
-
-        QUnit.module("1st Division", hooks => {
-
-            QUnit.test("simple numbers", function (assert) {
-                assert.throws(
-                    function () {
-                        throw CallError.orderUpdate();
-                    },
-                    ErrorTable.OrderRefund
-                );
-
-            });
-
+    QUnit.module('./lib/error > class CallError', hooks => {
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .execution()', assert => {
+            assert.throws(() => { throw CallError.execution() }, ErrorTable.Execution);
         });
-
-        QUnit.module("2nd Division", hooks => {
-
-            QUnit.test("simple numbers", function (assert) {
-                assert.equal(divideThenRound(10, 2), 4, "whole numbers");
-                assert.equal(divideThenRound(10, 4), 3, "decimal numbers");
-            });
-
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .calendarApp()', assert => {
+            assert.throws(() => { throw CallError.calendarApp() }, ErrorTable.CalendarApp);
         });
-    });
-
-    QUnit.module("Advanced tests", hooks => {
-
-        QUnit.module("1st Division", hooks => {
-
-            QUnit.test("simple numbers", function (assert) {
-                assert.equal(divideThenRound(10, 2), 5, "whole numbers");
-                assert.equal(divideThenRound(10, 4), 3, "decimal numbers");
-            });
-
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .date()', assert => {
+            assert.throws(() => { throw CallError.date() }, ErrorTable.Date);
         });
-
-        QUnit.module("2nd Division", hooks => {
-
-            QUnit.test("simple numbers", function (assert) {
-                assert.equal(divideThenRound(10, 2), 5, "whole numbers");
-                assert.equal(divideThenRound(10, 4), 3, "decimal numbers");
-            });
-
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .postalCode()', assert => {
+            assert.throws(() => { throw CallError.postalCode() }, ErrorTable.PostalCode);
         });
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .document()', assert => {
+            assert.throws(() => { throw CallError.document() }, ErrorTable.Document);
+        });
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .phone()', assert => {
+            assert.throws(() => { throw CallError.phone() }, ErrorTable.Phone);
+        });
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .orderRefund()', assert => {
+            assert.throws(() => { throw CallError.orderRefund() }, ErrorTable.OrderRefund);
+        });
+        // ------------------------------------------------------------------------------------------
+        QUnit.test('for method: .orderUpdate()', assert => {
+            assert.throws(() => { throw CallError.orderUpdate() }, ErrorTable.OrderUpdate);
+        });
+        // ------------------------------------------------------------------------------------------
     });
     // ----------------------------------------------------------------------------------------------
 }

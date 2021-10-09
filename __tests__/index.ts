@@ -13,6 +13,8 @@ const QUnit = QUnitGS2.QUnit;
 // --------------------------------------------------------------------------------------------------
 function qunit(qunitParams: QUnitParams) {
     // ----------------------------------------------------------------------------------------------
+    console.log(`######## ${qunitParams.title} ########`);
+    // ----------------------------------------------------------------------------------------------
     QUnitGS2.init();
     // ----------------------------------------------------------------------------------------------
     QUnit.config.title = qunitParams.title;
@@ -23,29 +25,38 @@ function qunit(qunitParams: QUnitParams) {
     // ----------------------------------------------------------------------------------------------
     QUnit.start();
     // ----------------------------------------------------------------------------------------------
-    QUnit.testDone(details => {
-        const result = {
-            "Module name": details.module,
-            "Test name": details.name,
-            "Assertions": {
-                "Total": details.total,
-                "Passed": details.passed,
-                "Failed": details.failed
-            },
-            "Skipped": details.skipped,
-            "Todo": details.todo,
-            "Runtime": details.runtime
-        };
-        if (qunitParams.verbose || details.total !== details.passed) {
-            console.log(JSON.stringify(result, null, 2));
-            console.log(
-                `Total: ${details.total} Failed: ${details.failed} `
-                + `Passed: ${details.passed} Runtime: ${details.runtime}`
-            );
-        }
+    QUnit.moduleStart(details => {
+        console.log(`#### Module: ${details.name} > Tests: ${details.tests.length}`);
     });
     // ----------------------------------------------------------------------------------------------
-    console.log(`#### ${qunitParams.title} ####`);
+    QUnit.testDone(details => {
+        const result = `## Test: ${details.name} > Passed: ${details.passed} `
+            + `> Failed: ${details.failed} > Average Runtime: ${Math.round(details.runtime / details.total)}`;
+
+        if (qunitParams.verbose) {
+            if (details.failed) {
+                console.error(result);
+                console.log(JSON.stringify(details.assertions, null, 2));
+            }
+            else {
+                console.log(result);
+            }
+        }
+        else if (details.total !== details.passed)
+            console.error(result);
+    });
+    // ----------------------------------------------------------------------------------------------
+    QUnit.moduleDone(details => {
+        console.log(`>> Summary: ${details.name} > Failed: ${details.failed} > Passed: ${details.passed}`);
+    });
+    // ----------------------------------------------------------------------------------------------
+    QUnit.done(details => {
+        console.log('######## Tests Done ########');
+        console.log(
+            `> Total: ${details.total} > Passed: ${details.passed} `
+            + `> Failed: ${details.failed} > Runtime: ${details.runtime}`
+        );
+    })
     // ----------------------------------------------------------------------------------------------
 }
 // --------------------------------------------------------------------------------------------------
