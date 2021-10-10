@@ -1,6 +1,6 @@
 import { IPatient } from "./interface/patient";
 import { IConsultation } from "./interface/consultation";
-import { IOrder } from "../lib/payment/interfaces";
+import { IOrder } from "../library/payment/interfaces";
 import {
     ConsultationModality,
     ConsultationStatus,
@@ -8,7 +8,7 @@ import {
     PaymentContract,
     ConsultationLocation
 } from "./enum/business";
-import Time from "../lib/time";
+import Time from "../library/time";
 import { DocumentType } from "./enum/personal";
 // --------------------------------------------------------------------------------------------------
 function patientProspect(): IPatient {

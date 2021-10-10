@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------
-import { PaymentStatus } from "../../lib/payment/config";
+import { PaymentStatus } from "../../library/payment/config";
 import {
     ConsultationLocation,
     ConsultationType,

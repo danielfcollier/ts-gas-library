@@ -36,7 +36,7 @@ interface Record {
     lastConsultationDate?: Date;
 }
 // --------------------------------------------------------------------------------------------------
-interface Address {
+export interface Address {
     postalCode: string;
     street: string;
     number: string;

@@ -2,11 +2,12 @@
 import { doctor } from "./.config.doctor";
 import { payment } from "./.config.payment"
 // --------------------------------------------------------------------------------------------------
-const isSandbox = false;
+const isSandbox = true;
 // --------------------------------------------------------------------------------------------------
 const process: any = {
     env: {
         LOG_LEVEL: 4,
+        IS_SANDBOX: isSandbox,
         PAYMENT_ROOT_URL: isSandbox ? payment.sandbox.url : payment.production.url,
         PAYMENT_ACCESS_TOKEN: isSandbox ? payment.sandbox.token : payment.production.token,
         PAYMENT_FAKE_CARD: payment.sandbox.card,

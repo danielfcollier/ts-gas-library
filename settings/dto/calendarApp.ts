@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import Meeting from "../../apps/calendar/interface";
-import Time from "../../lib/time";
+import Time from "../../library/time";
 // --------------------------------------------------------------------------------------------------
 interface IBooking {
     date: Date;

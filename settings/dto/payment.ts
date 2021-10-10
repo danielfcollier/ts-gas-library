@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
-import { ICustomer, IOrder } from "../../lib/payment/interfaces";
-import Show from "../../lib/show";
+import { ICustomer, IOrder } from "../../library/payment/interfaces";
+import Show from "../../library/show";
 import { IConsultation } from "../interface/consultation";
 import { IPatient } from "../interface/patient";
 // --------------------------------------------------------------------------------------------------
