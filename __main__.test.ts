@@ -18,7 +18,6 @@ function runQunit() {
   const verbose = true;
   // ------------------------------------------------------------------------------------------------
   const qunitTestLib = [
-    // testLibApi,
     testLibBrazillian,
     testLibError,
     testLibFetch,
@@ -35,6 +34,7 @@ function runQunit() {
   // ------------------------------------------------------------------------------------------------
   const qunitTestApp = [
     // testAppAnalytics
+    // testAppApi,
     // testAppCalendar
     // testAppContacts
     // testAppDrive

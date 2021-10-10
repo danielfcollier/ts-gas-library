@@ -1,7 +1,7 @@
-import AppCalendar from '../apps/calendar';
-import Meeting from '../apps/calendar/interface';
-import AppGmail from '../apps/gmail';
-import EmailParams from '../apps/gmail/interface';
+import AppCalendar from '../app/calendar';
+import Meeting from '../app/calendar/interface';
+import AppGmail from '../app/gmail';
+import EmailParams from '../app/gmail/interface';
 import Time from '../library/time';
 
 function documentTest() {

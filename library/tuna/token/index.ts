@@ -1,44 +1,57 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
 import FetchApp from "../../fetch";
-import tunaHeaders from "../headers";
-// ------------------------------------------------------------------------------------------------
-interface ITunaMerchant {
-  merchantId: string;
-}
+import {tunaHeaders} from "../config";
+import { ITunaCustomer, ITunaOrder } from "../interfaces";
 // ------------------------------------------------------------------------------------------------
 export default class TunaToken {
   // ----------------------------------------------------------------------------------------------
   private static API: string = process.env.TUNA_TOKEN_ROOT_URL;
   // ----------------------------------------------------------------------------------------------
-  static newSession({ customer: ITunaCustomer, partnerId: string }, options?) {
-    const payload = { customer, partnerId };
-
-    return FetchApp.post(`${this.API}/NewSession`, payload, { ...options, headers: tunaHeaders });
+  static newSession(tunaCustomer: Pick<ITunaCustomer, 'id' | 'email'>, tunaOrder: Pick<ITunaOrder, 'id'>, options?) {
+    const { sessionId, code } = FetchApp
+      .post(
+        `${this.API}/NewSession`,
+        { customer: { id: tunaCustomer.id, email: tunaCustomer.email }, partnerId: tunaOrder.id },
+        { ...options, headers: tunaHeaders }
+      );
+    return [sessionId, code];
   }
   // ----------------------------------------------------------------------------------------------
-  static generate({ sessionId, card }, options?) {
-    const payload = { sessionId, card: { ...card } };
-    delete payload.card.cvv;
+  static generate(tunaOrder: Pick<ITunaOrder, 'sessionId' | 'card'>, options?) {
+    const { sessionId, card } = tunaOrder;
+    const cardTemp = { ...card };
+    delete cardTemp.cvv;
 
-    return FetchApp.post(`${this.API}/Generate`, payload, { ...options, headers: tunaHeaders });
+    const { token, brand, code } = FetchApp
+      .post(
+        `${this.API}/Generate`,
+        { sessionId, card: cardTemp },
+        { ...options, headers: tunaHeaders }
+      );
+    return [token, brand, code];
   }
   // ----------------------------------------------------------------------------------------------
-  static bind({ sessionId, token, card }, options?) {
-    const { cvv } = card;
-    const payload = { sessionId, token, cvv };
+  static bind(tunaOrder: Pick<ITunaOrder, 'sessionId' | 'token' | 'card'>, options?) {
+    const { sessionId, token, card } = tunaOrder;
 
-    return FetchApp.post(`${this.API}/Bind`, payload, { ...options, headers: tunaHeaders });
+    const { code } = FetchApp
+      .post(
+        `${this.API}/Bind`,
+        { sessionId, token, cvv: card.cvv },
+        { ...options, headers: tunaHeaders }
+      );
+    return code;
   }
   // ----------------------------------------------------------------------------------------------
-  static mount(params) {
-    params.card.tokenSingleUse = params.card.singleUse ? 1 : 0;
-    params.card.saveCard = params.card.singleUse;
-    params.card.tokenProvider = 'Tuna';
-    delete params.card.cardNumber;
-    delete params.card.expirationMonth;
-    delete params.card.expirationYear;
-    delete params.card.singleUse;
+  static mount(tunaOrder: ITunaOrder) {
+    tunaOrder.card.tokenSingleUse = tunaOrder.card.singleUse ? 1 : 0;
+    tunaOrder.card.saveCard = tunaOrder.card.singleUse;
+    tunaOrder.card.tokenProvider = 'Tuna';
+    delete tunaOrder.card.cardNumber;
+    delete tunaOrder.card.expirationMonth;
+    delete tunaOrder.card.expirationYear;
+    delete tunaOrder.card.singleUse;
   }
 }
   // ------------------------------------------------------------------------------------------------

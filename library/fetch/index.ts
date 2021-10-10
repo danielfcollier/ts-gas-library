@@ -1,12 +1,12 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
 import { Options } from './interfaces';
-import HEADERS from '../payment/headers';
+import {paymentHeaders} from '../payment/config';
 // --------------------------------------------------------------------------------------------------
 export default class FetchApp {
     // ----------------------------------------------------------------------------------------------
     static request(method, options: Options) {
-        const headers = options?.headers ?? HEADERS;
+        const headers = options?.headers ?? paymentHeaders;
         return { method, headers };
     };
     // ----------------------------------------------------------------------------------------------

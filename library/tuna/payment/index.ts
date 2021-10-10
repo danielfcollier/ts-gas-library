@@ -1,21 +1,22 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
 import FetchApp from "../../fetch";
-import tunaHeaders from "../headers";
+import { tunaHeaders, tunaPaymentStatus } from "../config";
+import { ITunaCustomer, ITunaOrder } from "../interfaces";
 // ------------------------------------------------------------------------------------------------
 export default class TunaPayment {
     // --------------------------------------------------------------------------------------------
     private static API: string = process.env.TUNA_PAYMENT_ROOT_URL;
     // --------------------------------------------------------------------------------------------
-    static init(params, options) {
+    static init(customer: ITunaCustomer, order: ITunaOrder, options?) {
 
-        const { customer, order, card, token, sessionId } = params;
+        const { card, token, sessionId } = order;
         const { id } = order;
         delete order.id;
 
         const payload = {
-            partnerUniqueId: id,
-            tokenSession: sessionId,
+            partnerUniqueId: order.id,
+            tokenSession: order.sessionId,
             customer,
             paymentData: {
                 paymentMethods: [{
@@ -23,15 +24,23 @@ export default class TunaPayment {
                     cardInfo: {
                         token,
                         ...card,
-                        billingInfo: params.address
+                        billingInfo: {
+                            ...(order?.address ?? customer.address)
+                        }
                     }
                 }],
                 countrycode: 'BR'
             },
         };
 
-        return FetchApp.post(`${this.API}/Init`, payload, { ...options, headers: tunaHeaders });
+        return FetchApp
+            .post(
+                `${this.API}/Init`,
+                payload,
+                { ...options, headers: tunaHeaders }
+            );
     }
+
     // ----------------------------------------------------------------------------------------------
     static status(params, options = { verbose: false }) {
         const statusResponse = this.statusFlow(params, options);
@@ -51,7 +60,7 @@ export default class TunaPayment {
 
         const HEX_BASE = 16;
         const key = lastestResponse.status;
-        const message = tunaStatus[parseInt(`${key}`, HEX_BASE)];
+        const message = tunaPaymentStatus[parseInt(`${key}`, HEX_BASE)];
         console.log(message);
     }
     // ----------------------------------------------------------------------------------------------

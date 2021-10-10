@@ -1,11 +1,10 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
 import FetchApp from "../../fetch";
-import tunaHeaders from "../headers";
+import {tunaHeaders} from "../config";
+import { ITunaMerchant } from "../interfaces";
 // ------------------------------------------------------------------------------------------------
-interface ITunaMerchant {
-    merchantId: string;
-}
+
 // ------------------------------------------------------------------------------------------------
 export default class TunaMerchant {
     // --------------------------------------------------------------------------------------------

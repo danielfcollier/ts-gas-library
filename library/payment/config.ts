@@ -1,4 +1,11 @@
 // --------------------------------------------------------------------------------------------------
+import process from '../../.env';
+// --------------------------------------------------------------------------------------------------
+const paymentHeaders = {
+    'access_token': process.env.PAYMENT_ACCESS_TOKEN,
+    'content-type': 'application/json'
+};
+// --------------------------------------------------------------------------------------------------
 enum PaymentStatus {
     Pending = 'PENDING',
     Received = 'RECEIVED',
@@ -35,5 +42,10 @@ enum BillingTypeBR {
     Pix = 'PIX'
 }
 // --------------------------------------------------------------------------------------------------
-export { PaymentStatus, BillingType, BillingTypeBR };
+export {
+    paymentHeaders,
+    PaymentStatus,
+    BillingType,
+    BillingTypeBR
+};
 // --------------------------------------------------------------------------------------------------

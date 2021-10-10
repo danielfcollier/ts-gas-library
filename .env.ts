@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import { doctor } from "./.config.doctor";
-import { payment } from "./.config.payment"
+import { payment, tuna } from "./.config.payment"
 // --------------------------------------------------------------------------------------------------
 const isSandbox = true;
 // --------------------------------------------------------------------------------------------------
@@ -17,7 +17,12 @@ const process: any = {
         CALENDAR_APP_ID: doctor.calendarAppId,
         CALENDAR_CLOSED_MEETING_COLOR: CalendarApp.EventColor.GRAY,
         CALENDAR_CLOSED_MEETING_TITLE: 'BLOQUEADO',
-        CALENDAR_OPEN_MEETING_TITLE: 'LIVRE'
+        CALENDAR_OPEN_MEETING_TITLE: 'LIVRE',
+        TUNA_ACCOUNT: isSandbox ? tuna.sandbox.account : tuna.production.account,
+        TUNA_APP_TOKEN: isSandbox ? tuna.sandbox.appToken : tuna.production.appToken,
+        TUNA_PAYMENT_ROOT_URL: isSandbox ? tuna.sandbox.urlEngine : tuna.production.urlEngine,
+        TUNA_MERCHANT_ROOT_URL: isSandbox ? tuna.sandbox.urlEngine : tuna.production.urlEngine,
+        TUNA_TOKEN_ROOT_URL: isSandbox ? tuna.sandbox.urlToken : tuna.production.urlToken,
     }
 };
 // --------------------------------------------------------------------------------------------------
