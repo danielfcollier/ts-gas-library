@@ -1,18 +1,19 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
 import FetchApp from "../../fetch";
-import {tunaHeaders} from "../config";
+import { tunaHeaders } from "../config";
 import { ITunaCustomer, ITunaOrder } from "../interfaces";
 // ------------------------------------------------------------------------------------------------
 export default class TunaToken {
   // ----------------------------------------------------------------------------------------------
-  private static API: string = process.env.TUNA_TOKEN_ROOT_URL;
+  private static API: string = `${process.env.TUNA_TOKEN_ROOT_URL}/api/Token`;
   // ----------------------------------------------------------------------------------------------
-  static newSession(tunaCustomer: Pick<ITunaCustomer, 'id' | 'email'>, tunaOrder: Pick<ITunaOrder, 'id'>, options?) {
-    const { sessionId, code } = FetchApp
-      .post(
+  static newSession(tunaCustomer: ITunaCustomer, options?) {
+    const customerSelector = ({ id, email, document, documentType }) => ({ id, email, document, documentType });
+    const { sessionId, code } =
+      FetchApp.post(
         `${this.API}/NewSession`,
-        { customer: { id: tunaCustomer.id, email: tunaCustomer.email }, partnerId: tunaOrder.id },
+        { customer: customerSelector(tunaCustomer) },
         { ...options, headers: tunaHeaders }
       );
     return [sessionId, code];
@@ -23,8 +24,8 @@ export default class TunaToken {
     const cardTemp = { ...card };
     delete cardTemp.cvv;
 
-    const { token, brand, code } = FetchApp
-      .post(
+    const { token, brand, code } =
+      FetchApp.post(
         `${this.API}/Generate`,
         { sessionId, card: cardTemp },
         { ...options, headers: tunaHeaders }
@@ -35,8 +36,8 @@ export default class TunaToken {
   static bind(tunaOrder: Pick<ITunaOrder, 'sessionId' | 'token' | 'card'>, options?) {
     const { sessionId, token, card } = tunaOrder;
 
-    const { code } = FetchApp
-      .post(
+    const { code } =
+      FetchApp.post(
         `${this.API}/Bind`,
         { sessionId, token, cvv: card.cvv },
         { ...options, headers: tunaHeaders }
@@ -54,4 +55,4 @@ export default class TunaToken {
     delete tunaOrder.card.singleUse;
   }
 }
-  // ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------

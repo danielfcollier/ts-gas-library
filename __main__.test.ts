@@ -7,6 +7,7 @@ import testLibPayment from "./library/payment/__index__.test";
 import testLibResources from "./library/resources/__index__.test";
 import testLibShow from "./library/show/__index__.test";
 import testLibTime from "./library/time/__index__.test";
+import testLibTuna from "./library/tuna/__index__.test";
 import testLibUtils from "./library/utils/__index__.test";
 import testLibValidation from "./library/validation/__index__.test";
 // --------------------------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ function runQunit() {
     testLibResources,
     testLibShow,
     testLibTime,
-    // testLibTuna,
+    testLibTuna,
     testLibUtils,
     testLibValidation
   ];

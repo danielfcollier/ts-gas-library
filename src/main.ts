@@ -6,6 +6,9 @@ import { OrdersQuery } from '../library/payment/interfaces';
 import Show from '../library/show';
 import Time from '../library/time';
 import BrFormatter from '../library/brazillian';
+import { mountTunaSandboxParams, TunaSandboxPaymentActions } from '../library/tuna/.sandbox/payment';
+import TunaToken from '../library/tuna/token';
+import { tunaPaymentStatus } from '../library/tuna/config';
 // --------------------------------------------------------------------------------------------------
 const verbose = true;
 const customerId = 'cus_000024421601';
@@ -17,7 +20,9 @@ if (isInstallment) args.installmentCount = 3;
 // Utilities.getUuid()
 // Utilities.parseCsv(csv)
 function testing() {
-    BrFormatter.writtenNumber('10');
+    
+    console.log(tunaPaymentStatus[10])
+
 }
 // --------------------------------------------------------------------------------------------------
 function createCustomer() {

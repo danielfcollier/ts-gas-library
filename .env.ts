@@ -4,7 +4,7 @@ import { payment, tuna } from "./.config.payment"
 // --------------------------------------------------------------------------------------------------
 const isSandbox = true;
 // --------------------------------------------------------------------------------------------------
-const process: any = {
+const process: {env: any} = {
     env: {
         LOG_LEVEL: 4,
         IS_SANDBOX: isSandbox,

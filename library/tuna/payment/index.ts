@@ -2,30 +2,40 @@
 import process from "../../../.env";
 import FetchApp from "../../fetch";
 import { tunaHeaders, tunaPaymentStatus } from "../config";
-import { ITunaCustomer, ITunaOrder } from "../interfaces";
+import { ITunaCreditCard, ITunaCustomer, ITunaOrder } from "../interfaces";
+// ------------------------------------------------------------------------------------------------
+type ICrediCardSelector = Pick<ITunaCreditCard, 'cardHolderName' | 'cvv' | 'brandName' | 'tokenSingleUse' | 'saveCard' | 'tokenProvider'>;
 // ------------------------------------------------------------------------------------------------
 export default class TunaPayment {
     // --------------------------------------------------------------------------------------------
-    private static API: string = process.env.TUNA_PAYMENT_ROOT_URL;
+    private static API: string = `${process.env.TUNA_PAYMENT_ROOT_URL}/api/Payment`;
     // --------------------------------------------------------------------------------------------
     static init(customer: ITunaCustomer, order: ITunaOrder, options?) {
 
-        const { card, token, sessionId } = order;
-        const { id } = order;
-        delete order.id;
+        const customerSelector =
+            ({ id, email, name, document, documentType }) => {
+                return ({ id, email, name, document, documentType });
+            };
+        const { id, sessionId, paymentMethodType, amount, card, token, address, phone } = order;
+        const creditCardSelector =
+            ({ cardHolderName, cvv, brandName, tokenSingleUse, saveCard, tokenProvider }: ICrediCardSelector) => {
+                return ({ cardHolderName, cvv, brandName, tokenSingleUse, saveCard, tokenProvider })
+            };
 
         const payload = {
-            partnerUniqueId: order.id,
-            tokenSession: order.sessionId,
-            customer,
+            partnerUniqueId: id,
+            tokenSession: sessionId,
+            customer: customerSelector(customer),
             paymentData: {
                 paymentMethods: [{
-                    ...order,
+                    paymentMethodType,
+                    amount,
                     cardInfo: {
                         token,
-                        ...card,
+                        ...creditCardSelector(card),
                         billingInfo: {
-                            ...(order?.address ?? customer.address)
+                            ...(address ?? customer.address),
+                            phone: (phone ?? customer.phone)
                         }
                     }
                 }],
@@ -40,7 +50,18 @@ export default class TunaPayment {
                 { ...options, headers: tunaHeaders }
             );
     }
+    // ----------------------------------------------------------------------------------------------
+    static cancelAll(order: Pick<ITunaOrder, 'id' | 'paymentDate'>, options?) {
 
+        const { id, paymentDate } = order;
+        const payload = {
+            partnerUniqueId: id,
+            paymentDate: Utilities.formatDate(paymentDate, 'GMT', "yyyy-MM-dd'T'HH:mm:ss"),
+            cancelAll: true
+        };
+
+        return FetchApp.post(`${this.API}/Cancel`, payload, { ...options, headers: tunaHeaders });
+    }
     // ----------------------------------------------------------------------------------------------
     static status(params, options = { verbose: false }) {
         const statusResponse = this.statusFlow(params, options);
@@ -62,26 +83,6 @@ export default class TunaPayment {
         const key = lastestResponse.status;
         const message = tunaPaymentStatus[parseInt(`${key}`, HEX_BASE)];
         console.log(message);
-    }
-    // ----------------------------------------------------------------------------------------------
-    static cancelAll(params, options) {
-
-        const { partnerUniqueId, paymentKey, paymentDate } = params;
-        const payload = {
-            partnerUniqueId,
-            paymentKey,
-            paymentDate,
-            cancelAll: true
-        };
-        /*
-        const payload = {
-          partnerUniqueId, // orderId
-          paymentDate,
-          cancelAll: true
-        };
-        */
-
-        return FetchApp.post(`${this.API}/Cancel`, payload, { ...options, headers: tunaHeaders });
     }
     // ----------------------------------------------------------------------------------------------
     static cancel(params, options) {
