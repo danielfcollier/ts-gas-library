@@ -1,12 +1,12 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
-import FetchApp from "../../fetch";
+import FetchApp from "../../fetch/index";
 import { tunaHeaders } from "../config";
 import { ITunaCustomer, ITunaOrder } from "../interfaces";
 // ------------------------------------------------------------------------------------------------
 export default class TunaToken {
-  // ----------------------------------------------------------------------------------------------
-  private static API: string = `${process.env.TUNA_TOKEN_ROOT_URL}/api/Token`;
+ // ----------------------------------------------------------------------------------------------
+ private static API: string = `${process.env.TUNA_TOKEN_ROOT_URL}/api/Token`;
   // ----------------------------------------------------------------------------------------------
   static newSession(tunaCustomer: ITunaCustomer, options?) {
     const customerSelector = ({ id, email, document, documentType }) => ({ id, email, document, documentType });

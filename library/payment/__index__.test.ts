@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import { Customer, Order, Finances } from '.';
+import { Customer, Order, Finances } from './index';
 // --------------------------------------------------------------------------------------------------
 function testLibPayment() {
     //

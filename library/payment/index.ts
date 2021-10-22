@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import CallError from '../error';
-import FetchApp from '../fetch';
-import Show from '../show';
-import Utils from '../utils';
+import CallError from '../error/index';
+import FetchApp from '../fetch/index';
+import Show from '../show/index';
+import Utils from '../utils/index';
 import { BillingType, PaymentStatus } from './config';
 import { ICustomer, IOrder, OrdersQuery } from './interfaces';
 // --------------------------------------------------------------------------------------------------

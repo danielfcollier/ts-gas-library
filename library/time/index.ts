@@ -9,7 +9,7 @@ export default class Time {
         return { start, end };
     }
     // ----------------------------------------------------------------------------------------------
-    static getLocalTimestamp(date: Date) {
+    static getTimestamp(date: Date) {
         return Utilities.formatDate(date, process.env.GMT_LOCATION, "yyyy-MM-dd'T'HH:mm:ss");
     }
     // ----------------------------------------------------------------------------------------------

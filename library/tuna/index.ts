@@ -1,9 +1,9 @@
 // ------------------------------------------------------------------------------------------------
-import TunaMerchant from "./merchant";
-import TunaPayment from "./payment";
-import TunaToken from "./token";
-import { ITunaCustomer, ITunaOrder } from "./interfaces";
-import { tunaPaymentStatus } from "./config";
+import TunaMerchant from "./merchant/index";
+import TunaPayment from "./payment/index";
+import TunaToken from "./token/index";
+import { ITunaCustomer, OmitITunaMerchant, PickITunaMerchant, ITunaOrder } from "./interfaces";
+import { tunaPaymentStatusMap } from "./config";
 // ------------------------------------------------------------------------------------------------
 export default class TunaFlow {
   // ----------------------------------------------------------------------------------------------
@@ -32,12 +32,20 @@ export default class TunaFlow {
   // ----------------------------------------------------------------------------------------------
   static paymentRefund(order: Pick<ITunaOrder, 'id' | 'paymentDate'>, options?) {
     const { status, code } = TunaPayment.cancelAll(order, options);
-    return { status, code, message: tunaPaymentStatus[status ?? 10] };
+    return { status, code, message: tunaPaymentStatusMap.get(status ?? 10) };
   }
   // ----------------------------------------------------------------------------------------------
   static paymentStatus(order: Pick<ITunaOrder, 'id' | 'paymentDate'>, options?) {
     const { status, code } = TunaPayment.status(order, options);
-    return { status, code, message: tunaPaymentStatus[status ?? 10] };
+    return { status, code, message: tunaPaymentStatusMap.get(status ?? 10) };
+  }
+  // ----------------------------------------------------------------------------------------------
+  static merchantRegister(merchant: OmitITunaMerchant, options?) {
+    return TunaMerchant.register(merchant, options);
+  }
+  // ----------------------------------------------------------------------------------------------
+  static merchantGetStatus(merchant: PickITunaMerchant, options?) {
+    return TunaMerchant.status(merchant, options);
   }
   // ----------------------------------------------------------------------------------------------
 }

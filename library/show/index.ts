@@ -1,10 +1,10 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import Utils from '../utils';
+import Utils from '../utils/index';
 import { Pattern } from './interfaces';
 
-import IsValid from '../validation';
-import Time from '../time';
+import IsValid from '../validation/index';
+import Time from '../time/index';
 // --------------------------------------------------------------------------------------------------
 export default class Show {
     // ----------------------------------------------------------------------------------------------

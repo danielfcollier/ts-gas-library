@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import Time from '.';
+import Time from './index';
 // --------------------------------------------------------------------------------------------------
 function testLibTime() {
     // ----------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ function testLibTime() {
 
         });
         // ------------------------------------------------------------------------------------------
-        QUnit.test('for method: .getLocalTimestamp(date: Date)', assert => {
+        QUnit.test('for method: .getTimestamp(date: Date)', assert => {
             //
             assert.strictEqual(
                 process.env.GMT_LOCATION,
@@ -44,12 +44,12 @@ function testLibTime() {
             );
             //
             assert.strictEqual(
-                Time.getLocalTimestamp(new Date('2020-01-10T12:00:00')),
+                Time.getTimestamp(new Date('2020-01-10T12:00:00')),
                 '2020-01-10T09:00:00'
             );
             //
             assert.strictEqual(
-                Time.getLocalTimestamp(new Date('2020-01-10T00:00:00')),
+                Time.getTimestamp(new Date('2020-01-10T00:00:00')),
                 '2020-01-09T21:00:00'
             );
         });

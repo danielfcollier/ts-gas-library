@@ -3,3 +3,4 @@ node_modules/
 sample.curl.sh
 .config.doctor.ts
 .config.payment.ts
+.config.tuna.ts
