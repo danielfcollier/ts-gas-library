@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
-import Meeting from "../../app/calendar/interface";
-import Time from "../../library/time/index";
+import Meeting from "../../app/calendar/Meeting";
+import Time from "../../library/time/Time";
 // --------------------------------------------------------------------------------------------------
 interface IBooking {
     date: Date;
@@ -31,5 +31,5 @@ function meetingDTO(booking: IBooking): Omit<Meeting, 'id'> {
     }
 }
 // --------------------------------------------------------------------------------------------------
-export { meetingDTO };
+export default meetingDTO;
 // --------------------------------------------------------------------------------------------------

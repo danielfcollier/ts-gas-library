@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------
-import Contact from "../../app/contacts/interface";
+import Contact from "../../app/contacts/Contact";
 import { IPatient } from "../interface/patient";
 // --------------------------------------------------------------------------------------------------
 function contactsDTO(patient: IPatient): Contact {

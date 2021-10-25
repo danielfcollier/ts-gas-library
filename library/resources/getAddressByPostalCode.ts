@@ -1,8 +1,8 @@
 
 // --------------------------------------------------------------------------------------------------
 import { Address } from "../../settings/interface/patient";
-import FetchApp from "../fetch/index";
-import Utils from "../utils/index";
+import FetchApp from "../fetch/FetchApp";
+import Utils from "../utils/Utils";
 // --------------------------------------------------------------------------------------------------
 function getAddressByPostalCode(postalCode: string, verbose?: boolean) {
     try {
@@ -34,5 +34,5 @@ function getAddressByPostalCode(postalCode: string, verbose?: boolean) {
     }
 };
 // --------------------------------------------------------------------------------------------------
-export { getAddressByPostalCode };
+export default getAddressByPostalCode;
 // --------------------------------------------------------------------------------------------------

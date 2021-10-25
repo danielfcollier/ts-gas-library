@@ -1,18 +1,18 @@
 // --------------------------------------------------------------------------------------------------
 import { ICustomer, IOrder } from "../../library/payment/interfaces";
-import Show from "../../library/show";
+import Show from "../../library/show/Show";
 import { IConsultation } from "../interface/consultation";
 import { IPatient } from "../interface/patient";
 // --------------------------------------------------------------------------------------------------
-function buildFromPatientCustomerDTO(dto: IPatient): Omit<ICustomer, 'id'> {
+function buildFromPatientCustomerDTO(DTO: IPatient): Omit<ICustomer, 'id'> {
     const customer: any = {
-        externalReference: dto.id,
-        name: dto.fullName,
-        email: dto.email,
-        phone: dto.cellPhone,
-        mobilePhone: dto.cellPhone,
-        cpfCnpj: dto.document.number,
-        postalCode: dto.address.postalCode,
+        externalReference: DTO.id,
+        name: DTO.fullName,
+        email: DTO.email,
+        phone: DTO.cellPhone,
+        mobilePhone: DTO.cellPhone,
+        cpfCnpj: DTO.document.number,
+        postalCode: DTO.address.postalCode,
         addressNumber: 's/n',
         notificationDisabled: true,
         emailEnabledForProvider: false,
@@ -20,31 +20,30 @@ function buildFromPatientCustomerDTO(dto: IPatient): Omit<ICustomer, 'id'> {
         emailEnabledForCustomer: false,
         smsEnabledForCustomer: false,
         phoneCallEnabledForCustomer: false,
-        foreignCustomer: dto.foreignCustomer
+        foreignCustomer: DTO.foreignCustomer
     };
 
     return customer;
 }
 // --------------------------------------------------------------------------------------------------
-function buidlFromConsultationOrderDTO(dto: IConsultation): Omit<IOrder, 'id'> {
+function buidlFromConsultationOrderDTO(DTO: IConsultation): Omit<IOrder, 'id'> {
     const order: any = {
-        externalReference: dto.id,
-        customer: dto.patient,
-        dueDate: Show.dateForSystem(dto.dueDate),
-        description: dto.description,
+        externalReference: DTO.id,
+        customer: DTO.patient,
+        dueDate: Show.dateForSystem(DTO.dueDate),
+        description: DTO.description,
         postalService: false
     };
 
-    if (!dto?.installmentCount) {
+    if (!DTO?.installmentCount) {
         order.billingType = 'UNDEFINED';
-        order.value = dto.value;
-    }
-    else {
+        order.value = DTO.value;
+    } else {
         order.billingType = 'CREDIT_CARD';
-        order.totalValue = dto.value;
-        order.installmentCount = dto.installmentCount;
+        order.totalValue = DTO.value;
+        order.installmentCount = DTO.installmentCount;
     }
-    
+
     return order;
 }
 // --------------------------------------------------------------------------------------------------

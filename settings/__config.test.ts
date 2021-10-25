@@ -39,12 +39,10 @@ function qunit(qunitParams: QUnitParams) {
             if (details.failed) {
                 console.error(result);
                 console.log(JSON.stringify(details.assertions, null, 2));
-            }
-            else {
+            } else {
                 console.log(result);
             }
-        }
-        else if (details.total !== details.passed)
+        } else if (details.total !== details.passed)
             console.error(result);
     });
     // ----------------------------------------------------------------------------------------------

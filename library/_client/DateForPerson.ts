@@ -12,8 +12,7 @@ export default class DateForPerson {
 
         if (cleanString.length >= 2 && cleanString.length < 4) {
             return `${cleanString.substr(0, 2)}/${cleanString.substr(2)}`;
-        }
-        else if (cleanString.length >= 4 && cleanString.length <= 8) {
+        } else if (cleanString.length >= 4 && cleanString.length <= 8) {
             return `${cleanString.substr(0, 2)}/${cleanString.substr(2, 2)}/${cleanString.substr(4)}`;
         }
 
@@ -31,8 +30,7 @@ export default class DateForPerson {
         if (date) {
             const [yyyy, mm, dd] = date.split('-');
             return `${dd}/${mm}/${yyyy}`;
-        } else {
-            return '';
         }
+        return '';
     }
 }

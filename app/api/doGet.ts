@@ -3,7 +3,7 @@
 //     let outputResponse;
 //     let dbDataArray, row;
   
-//     const sellerId = parseInt(e.parameter.sellerId) ?? -1;
+//     const sellerId = parseInt(e.parameter.sellerId, 10) ?? -1;
   
 //     if (sellerId === -1) {
 //       outputResponse = { code: -101, message: 'Invalid request!' };

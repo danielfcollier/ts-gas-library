@@ -1,10 +1,7 @@
 // --------------------------------------------------------------------------------------------------
-import process from '../../.env';
-import Utils from '../utils/index';
-import { Pattern } from './interfaces';
-
-import IsValid from '../validation/index';
-import Time from '../time/index';
+import Utils from '../utils/Utils';
+import Pattern from './Pattern';
+import IsValid from '../validation/IsValid';
 // --------------------------------------------------------------------------------------------------
 export default class Show {
     // ----------------------------------------------------------------------------------------------
@@ -40,8 +37,7 @@ export default class Show {
         if (!IsValid.document(document)) return '';
         if (document.length === 11) {
             return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        }
-        else if (document.length === 14) {
+        } else if (document.length === 14) {
             return document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
         }
     }
@@ -70,16 +66,13 @@ export default class Show {
     private static phoneMasks(phone: string) {
         if (phone.length === 11) {
             return phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        }
-        else if (phone.length === 10) {
+        } else if (phone.length === 10) {
             return phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-        }
-        else if (phone[0] === '+') {
+        } else if (phone[0] === '+') {
             return phone;
         }
-        else {
-            return `+${phone}`;
-        }
+
+        return `+${phone}`;
     }
     // ----------------------------------------------------------------------------------------------
     private static cellPhoneFormatter(cellPhone: string) {
@@ -92,9 +85,8 @@ export default class Show {
                 const isBrazillian = (phone.slice(0, 3) === `+${brPrefix}`) ? true : false;
                 return { isInternational, isBrazillian };
             }
-            else {
-                return { isInternational };
-            }
+
+            return { isInternational };
         };
 
         const { isInternational, isBrazillian } = internationalNumberHandler(cellPhone);

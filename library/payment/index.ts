@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import CallError from '../error/index';
-import FetchApp from '../fetch/index';
-import Show from '../show/index';
-import Utils from '../utils/index';
+import CallError from '../error/CallError';
+import FetchApp from '../fetch/FetchApp';
+import Show from '../show/Show';
+import Utils from '../utils/Utils';
 import { BillingType, PaymentStatus } from './config';
 import { ICustomer, IOrder, OrdersQuery } from './interfaces';
 // --------------------------------------------------------------------------------------------------
@@ -102,10 +102,10 @@ export class Order {
         if (endpoint === 'installments') {
             return this.updateInstallment(order, options);
         }
-        else {
-            const response = FetchApp.post(`${this.API}/${endpoint}/${id}`, order, options);
-            return this.responseDTO(response, order, options);
-        }
+
+        const response = FetchApp.post(`${this.API}/${endpoint}/${id}`, order, options);
+        return this.responseDTO(response, order, options);
+
     }
     // ----------------------------------------------------------------------------------------------
     static cancel(order: Pick<IOrder, 'id' | 'installmentCount'>, options?) {
@@ -361,8 +361,7 @@ export class Finances {
 
         if (queryParams.all) {
             this.ordersLoop(orders, queryParams);
-        }
-        else {
+        } else {
             this.getOrdersPerQuery(orders, queryParams);
         }
 
@@ -385,8 +384,7 @@ export class Finances {
 
         if (queryParams.all) {
             this.ordersLoop(orders, queryParams);
-        }
-        else {
+        } else {
             this.getOrdersPerQuery(orders, queryParams);
         }
 

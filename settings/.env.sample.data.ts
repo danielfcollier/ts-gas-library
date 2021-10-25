@@ -8,7 +8,7 @@ import {
     PaymentContract,
     ConsultationLocation
 } from "./enum/business";
-import Time from "../library/time/index";
+import Time from "../library/time/Time";
 import { DocumentType } from "./enum/personal";
 // --------------------------------------------------------------------------------------------------
 function patientProspect(): IPatient {

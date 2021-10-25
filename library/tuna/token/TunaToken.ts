@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------------------------------
 import process from "../../../.env";
-import FetchApp from "../../fetch/index";
+import FetchApp from "../../fetch/FetchApp";
 import { tunaHeaders } from "../config";
 import { ITunaCustomer, ITunaOrder } from "../interfaces";
 // ------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import process from "../../.env";
-import FetchApp from "../fetch"
+import FetchApp from "../fetch/FetchApp";
 // --------------------------------------------------------------------------------------------------
 interface SlackMessage {
     channel: string;

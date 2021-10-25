@@ -1,8 +1,5 @@
-import AppCalendar from '../app/calendar';
-import Meeting from '../app/calendar/interface';
-import AppGmail from '../app/gmail';
-import EmailParams from '../app/gmail/interface';
-import Time from '../library/time';
+import AppCalendar from "../app/calendar/AppCalendar";
+import Meeting from "../app/calendar/Meeting";
 
 function documentTest() {
     const meeting: Omit<Meeting, 'id'> = {

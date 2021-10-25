@@ -1,14 +1,9 @@
 // --------------------------------------------------------------------------------------------------
-import { patientProspect, consultationBooking } from '../settings/.env.sample.data';
-import { Customer, Order, Finances } from '../library/payment';
-import { buildFromPatientCustomerDTO, buidlFromConsultationOrderDTO } from '../settings/dto/payment';
-import { OrdersQuery } from '../library/payment/interfaces';
-import Show from '../library/show';
-import Time from '../library/time';
-import BrFormatter from '../library/brazillian';
-import { mountTunaSandboxParams, TunaSandboxPaymentActions } from '../library/tuna/.sandbox/payment';
-import TunaToken from '../library/tuna/token';
-import { tunaPaymentStatus } from '../library/tuna/config';
+
+import { Customer, Finances, Order } from "../library/payment/index";
+import { OrdersQuery } from "../library/payment/interfaces";
+import { buidlFromConsultationOrderDTO, buildFromPatientCustomerDTO } from "../settings/dto/payment";
+import {patientProspect, consultationBooking} from "../settings/.env.sample.data"
 // --------------------------------------------------------------------------------------------------
 const verbose = true;
 const customerId = 'cus_000024421601';

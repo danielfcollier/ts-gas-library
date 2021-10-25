@@ -7,12 +7,10 @@ export default class DocumentForPerson {
 
         if (cleanString.length === 11) {
             return cleanString.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        }
-        else if (cleanString.length === 14) {
+        } else if (cleanString.length === 14) {
             return cleanString.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
         }
-        else {
-            return document;
-        }
+
+        return document;
     }
 }

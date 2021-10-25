@@ -1,7 +1,7 @@
 // ------------------------------------------------------------------------------------------------
-import TunaMerchant from "./merchant/index";
-import TunaPayment from "./payment/index";
-import TunaToken from "./token/index";
+import TunaMerchant from "./merchant/TunaMerchant";
+import TunaPayment from "./payment/TunaPayment";
+import TunaToken from "./token/TunaToken";
 import { ITunaCustomer, OmitITunaMerchant, PickITunaMerchant, ITunaOrder } from "./interfaces";
 import { tunaPaymentStatusMap } from "./config";
 // ------------------------------------------------------------------------------------------------

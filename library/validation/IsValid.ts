@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------
-import Utils from '../utils/index';
-import Time from '../time/index';
-import Show from '../show/index';
+import Utils from '../utils/Utils';
+import Time from '../time/Time';
+import Show from '../show/Show';
 // --------------------------------------------------------------------------------------------------
 export default class IsValid {
     // ----------------------------------------------------------------------------------------------
@@ -42,13 +42,11 @@ export default class IsValid {
         document = Utils.cleanNumber(document);
         if (document.length === 11) {
             return this.cpf(document);
-        }
-        else if (document.length === 14) {
+        } else if (document.length === 14) {
             return this.cnpj(document);
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
     // ----------------------------------------------------------------------------------------------
     // Credits: https://gist.github.com/joaohcrangel/8bd48bcc40b9db63bef7201143303937
@@ -72,18 +70,18 @@ export default class IsValid {
         let sum = 0;
         let reminder;
         for (let i = 1; i <= 9; i++) {
-            sum = sum + parseInt(document.substring(i - 1, i)) * (11 - i);
+            sum = sum + parseInt(document.substring(i - 1, i), 10) * (11 - i);
         }
         reminder = (sum * 10) % 11;
         if ((reminder == 10) || (reminder == 11)) reminder = 0;
-        if (reminder != parseInt(document.substring(9, 10))) return false;
+        if (reminder != parseInt(document.substring(9, 10), 10)) return false;
         sum = 0;
         for (let i = 1; i <= 10; i++) {
-            sum = sum + parseInt(document.substring(i - 1, i)) * (12 - i);
+            sum = sum + parseInt(document.substring(i - 1, i), 10) * (12 - i);
         }
         reminder = (sum * 10) % 11;
         if ((reminder == 10) || (reminder == 11)) reminder = 0;
-        if (reminder != parseInt(document.substring(10, 11))) return false;
+        if (reminder != parseInt(document.substring(10, 11), 10)) return false;
         return true;
     }
     // ----------------------------------------------------------------------------------------------
@@ -101,7 +99,7 @@ export default class IsValid {
             let sum = 0;
 
             for (let i = x; i >= 1; i--) {
-                const n = parseInt(slice[x - i]);
+                const n = parseInt(slice[x - i], 10);
                 sum += n * factor--;
                 if (factor < 2) factor = 9;
             }
@@ -116,11 +114,11 @@ export default class IsValid {
 
         // Validate 1st last digt
         const digit0 = calc(12);
-        if (digit0 !== parseInt(digits[0])) return false;
+        if (digit0 !== parseInt(digits[0], 10)) return false;
 
         // Validate 2nd last digt
         const digit1 = calc(13);
-        if (digit1 !== parseInt(digits[1])) return false;
+        if (digit1 !== parseInt(digits[1], 10)) return false;
 
         return true;
     }

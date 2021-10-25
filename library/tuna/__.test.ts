@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import TunaFlow from './index';
+import TunaFlow from './TunaFlow';
 import { mountTunaSandboxParams, TunaSandboxPaymentActions } from './.sandbox/payment';
 import { OmitITunaMerchant } from './interfaces';
 // --------------------------------------------------------------------------------------------------

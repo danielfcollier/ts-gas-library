@@ -1,17 +1,17 @@
 // --------------------------------------------------------------------------------------------------
-import testLibBrazillian from "./library/brazillian/__index__.test";
-import testLibError from "./library/error/__index__.test";
-import testLibFetch from "./library/fetch/__index__.test";
-import testLibMath from "./library/math/__index__.test";
-import testLibPayment from "./library/payment/__index__.test";
-import testLibResources from "./library/resources/__index__.test";
-import testLibShow from "./library/show/__index__.test";
-import testLibTime from "./library/time/__index__.test";
-import testLibTuna from "./library/tuna/__index__.test";
-import testLibUtils from "./library/utils/__index__.test";
+import testLibBrazillian from "./library/brazillian/__.test";
+import testLibError from "./library/error/__.test";
+import testLibFetch from "./library/fetch/__.test";
+import testLibMath from "./library/math/__.test";
+import testLibPayment from "./library/payment/__.test";
+import testLibResources from "./library/resources/__.test";
+import testLibShow from "./library/show/__.test";
+import testLibTime from "./library/time/__.test";
+import testLibTuna from "./library/tuna/__.test";
+import testLibUtils from "./library/utils/__.test";
 import testLibValidation from "./library/validation/__index__.test";
 // --------------------------------------------------------------------------------------------------
-import { qunit, QUnitParams } from "./settings/__config__.test";
+import { qunit, QUnitParams } from "./settings/__config.test";
 // --------------------------------------------------------------------------------------------------
 function runQunit() {
   // ------------------------------------------------------------------------------------------------
