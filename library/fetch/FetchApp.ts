@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------
 import process from '../../.env';
-import { Options } from './interfaces';
+import { Options } from './Options';
 import {paymentHeaders} from '../payment/config';
 // --------------------------------------------------------------------------------------------------
 export default class FetchApp {

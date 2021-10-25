@@ -1,4 +1,4 @@
-import Utils from '../utils/index';
+import Utils from '../utils/Utils';
 
 export default class DateForPerson {
 
